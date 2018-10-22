@@ -8,7 +8,7 @@ int main(){
 	struct sockaddr_in serv;
 	int fd;
 	int conn;
-	char message[100]="";
+	char *message="";
 
 	serv.sin_family=AF_INET;
 	serv.sin_port=htons(8096);
@@ -25,8 +25,7 @@ int main(){
 		if((pid=fork())==0){
 			while(recv(conn, message, 100, 0)>0){
 				printf("Message Recieved: %s\n", message);
-				for(int i=0;i<100;i++)
-					message[i] ="";
+				message="";		
 			}
 		}		
 	}
